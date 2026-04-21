@@ -14,7 +14,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     zlib1g-dev \
  && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
  && docker-php-ext-install -j"$(nproc)" \
-    curl \
     exif \
     gd \
     intl \
