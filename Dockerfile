@@ -1,15 +1,17 @@
 FROM php:8.2-cli-bookworm
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     libcurl4-openssl-dev \
     libfreetype6-dev \
     libicu-dev \
     libjpeg62-turbo-dev \
+    libonig-dev \
     libpng-dev \
     libsqlite3-dev \
     libwebp-dev \
     libxml2-dev \
     libzip-dev \
+    zlib1g-dev \
  && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
  && docker-php-ext-install -j"$(nproc)" \
     curl \
@@ -20,6 +22,7 @@ RUN apt-get update && apt-get install -y \
     mysqli \
     pdo_mysql \
     pdo_sqlite \
+    sqlite3 \
     zip \
  && rm -rf /var/lib/apt/lists/*
 
