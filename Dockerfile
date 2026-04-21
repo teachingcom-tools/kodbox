@@ -9,7 +9,6 @@ RUN set -eux; \
     libjpeg62-turbo-dev \
     libonig-dev \
     libpng-dev \
-    libsqlite3-dev \
     libwebp-dev \
     libxml2-dev \
     libzip-dev \
@@ -19,7 +18,6 @@ RUN set -eux; \
     docker-php-ext-install -j"$(nproc)" intl; \
     docker-php-ext-install -j"$(nproc)" mbstring; \
     docker-php-ext-install -j"$(nproc)" mysqli pdo_mysql; \
-    docker-php-ext-install -j"$(nproc)" pdo_sqlite sqlite3; \
     docker-php-ext-install -j"$(nproc)" zip; \
     docker-php-ext-install -j"$(nproc)" exif; \
     rm -rf /var/lib/apt/lists/*
