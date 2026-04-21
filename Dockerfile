@@ -1,6 +1,8 @@
 FROM php:8.2-cli-bookworm
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN set -eux; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends \
     libcurl4-openssl-dev \
     libfreetype6-dev \
     libicu-dev \
@@ -11,19 +13,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libwebp-dev \
     libxml2-dev \
     libzip-dev \
-    zlib1g-dev \
- && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
- && docker-php-ext-install -j"$(nproc)" \
-    exif \
-    gd \
-    intl \
-    mbstring \
-    mysqli \
-    pdo_mysql \
-    pdo_sqlite \
-    sqlite3 \
-    zip \
- && rm -rf /var/lib/apt/lists/*
+    zlib1g-dev; \
+    docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp; \
+    docker-php-ext-install -j"$(nproc)" gd; \
+    docker-php-ext-install -j"$(nproc)" intl; \
+    docker-php-ext-install -j"$(nproc)" mbstring; \
+    docker-php-ext-install -j"$(nproc)" mysqli pdo_mysql; \
+    docker-php-ext-install -j"$(nproc)" pdo_sqlite sqlite3; \
+    docker-php-ext-install -j"$(nproc)" zip; \
+    docker-php-ext-install -j"$(nproc)" exif; \
+    rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
